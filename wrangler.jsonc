@@ -18,5 +18,35 @@
 	"ai": {
 		"binding": "AI"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "warnetworkllm-db",
+			"database_id": "ec7041ac-1c54-4f88-8696-26947d121590"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "warnetwork-media"
+		}
+	],
+	// Nightly retention sweep: deletes expired uploads, sessions and throttle rows.
+	// 14:00 UTC = midnight AEST / 1am AEDT.
+	"triggers": {
+		"crons": ["0 14 * * *"]
+	},
+	"vars": {
+		"APP_ORIGIN": "https://warnetworkllm.warnetwork.workers.dev"
+	},
+	// Secrets (not vars — set with `wrangler secret put <NAME>`):
+	//   APP_SECRET      required. Keys session-token hashing and IP hashing for
+	//                   rate limiting/audit. Generate with:
+	//                     openssl rand -base64 32 | wrangler secret put APP_SECRET
+	//   NVIDIA_API_KEY  optional. Enables the Deep Think toggle (NVIDIA-hosted
+	//                   Nemotron 3 Ultra). Get a free key at https://build.nvidia.com
+	//                   and run: wrangler secret put NVIDIA_API_KEY
+	//                   If unset, Deep Think falls back to the normal model —
+	//                   nothing breaks.
 	"upload_source_maps": true
 }
