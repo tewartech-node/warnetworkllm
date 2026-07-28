@@ -31,13 +31,21 @@
 			"bucket_name": "warnetwork-media"
 		}
 	],
+	// Attaches warnetwork.online directly to this Worker (DNS + SSL are
+	// auto-provisioned by Cloudflare). Requires the domain's zone to already
+	// exist in this Cloudflare account — add it under Websites in the
+	// dashboard first if it isn't there yet, otherwise this entry fails to
+	// apply on the next deploy with a "zone not found" error.
+	"routes": [
+		{ "pattern": "warnetwork.online", "custom_domain": true }
+	],
 	// Nightly retention sweep: deletes expired uploads, sessions and throttle rows.
 	// 14:00 UTC = midnight AEST / 1am AEDT.
 	"triggers": {
 		"crons": ["0 14 * * *"]
 	},
 	"vars": {
-		"APP_ORIGIN": "https://warnetworkllm.warnetwork.workers.dev"
+		"APP_ORIGIN": "https://warnetwork.online"
 	},
 	// Secrets (not vars — set with `wrangler secret put <NAME>`):
 	//   APP_SECRET      required. Keys session-token hashing and IP hashing for
