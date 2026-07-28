@@ -1,4 +1,4 @@
-/* Warnetwork LLM — client */
+/* ServTech — client */
 
 const $ = (sel) => document.querySelector(sel);
 const state = { mode: 'signin', user: null, turns: [], attachments: [], oldestId: null, busy: false, deepThink: false };

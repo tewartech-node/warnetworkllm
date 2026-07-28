@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "warnetworkllm",
+	"name": "servtechworker",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-10-08",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -21,14 +21,14 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "warnetworkllm-db",
-			"database_id": "ec7041ac-1c54-4f88-8696-26947d121590"
+			"database_name": "servtechdb",
+			"database_id": "92b97c4c-dd55-4ae4-ac7e-d0ae2c715044"
 		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "warnetwork-media"
+			"bucket_name": "servtechr2"
 		}
 	],
 	// Attaches warnetwork.online directly to this Worker (DNS + SSL are

@@ -1,10 +1,11 @@
--- Warnetwork LLM — D1 schema.
+-- ServTech — D1 schema.
 --
--- This mirrors the schema that is ALREADY LIVE on the production
--- warnetworkllm-db database (applied directly against D1 at some point
--- before this file existed in git — it was never checked in until now).
--- Keep this file and the live database in sync going forward: if you
--- change one, change the other the same way.
+-- This mirrors the schema that is live on the production servtechdb
+-- database (originally applied directly against D1 under the name
+-- warnetworkllm-db, migrated to servtechdb on the ServTech rename — both
+-- were empty at migration time, so this was a straight schema re-apply,
+-- not a data migration). Keep this file and the live database in sync
+-- going forward: if you change one, change the other the same way.
 --
 -- Idempotent: CREATE ... IF NOT EXISTS is safe to run repeatedly. The one
 -- exception is the `uploads.kind` CHECK constraint below, which was

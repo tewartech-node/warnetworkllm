@@ -1,5 +1,5 @@
 /**
- * Warnetwork LLM — authenticated chat with image/file attachments and an
+ * ServTech — authenticated chat with image/file attachments and an
  * optional NVIDIA Nemotron "Deep Think" path.
  */
 import {
