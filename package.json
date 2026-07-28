@@ -1,6 +1,6 @@
 {
-	"name": "warnetworkllm",
-	"description": "A simple chat application powered by Cloudflare Workers AI",
+	"name": "servtech",
+	"description": "ServTech — authenticated chat application powered by Cloudflare Workers AI",
 	"cloudflare": {
 		"label": "LLM Chat App",
 		"products": [

@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "warnetworkllm",
+	"name": "servtech-worker",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-10-08",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -18,5 +18,43 @@
 	"ai": {
 		"binding": "AI"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "servtech-d1",
+			"database_id": "0225509e-1cdf-4f2a-ba09-0a79d37d2dae"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "servtech-r2"
+		}
+	],
+	// Attaches servtech.warnetwork.cloud directly to this Worker (DNS + SSL
+	// auto-provisioned by Cloudflare). warnetwork.cloud's zone already exists
+	// in this Cloudflare account, so this should attach cleanly on the next
+	// deploy — unlike the earlier warnetwork.online attempt, which had no
+	// zone at all.
+	"routes": [
+		{ "pattern": "servtech.warnetwork.cloud", "custom_domain": true }
+	],
+	// Nightly retention sweep: deletes expired uploads, sessions and throttle rows.
+	// 14:00 UTC = midnight AEST / 1am AEDT.
+	"triggers": {
+		"crons": ["0 14 * * *"]
+	},
+	"vars": {
+		"APP_ORIGIN": "https://servtech.warnetwork.cloud"
+	},
+	// Secrets (not vars — set with `wrangler secret put <NAME>`):
+	//   APP_SECRET      required. Keys session-token hashing and IP hashing for
+	//                   rate limiting/audit. Generate with:
+	//                     openssl rand -base64 32 | wrangler secret put APP_SECRET
+	//   NVIDIA_API_KEY  optional. Enables the Deep Think toggle (NVIDIA-hosted
+	//                   Nemotron 3 Ultra). Get a free key at https://build.nvidia.com
+	//                   and run: wrangler secret put NVIDIA_API_KEY
+	//                   If unset, Deep Think falls back to the normal model —
+	//                   nothing breaks.
 	"upload_source_maps": true
 }
